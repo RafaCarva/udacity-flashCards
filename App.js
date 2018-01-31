@@ -1,23 +1,39 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import {TabNavigator} from 'react-navigation'
+import Decks from './components/Decks'
+import NewDeck from './components/NewDeck'
+import {FontAwesome} from '@expo/vector-icons'
+
+
+ //mapeamento das views
+  const Tabs = TabNavigator({
+    Decks:{
+      screen: Decks,
+    },
+    NewDeck:{
+      screen:NewDeck,
+    },
+  },
+);
+
 
 export default class App extends React.Component {
+
+  //componentDidMount
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+
+       <Tabs style={styles.container} />
+ 
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    
+    fontSize:20
   },
 });

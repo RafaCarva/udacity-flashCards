@@ -1,4 +1,28 @@
+#Projeto Flashcards Mobile
+Esse app permite que o usuário cadastre listas de cards para estudo. É possível cadastrar 'baralhos' e popula-los com diversos cards de perguntas e respostaas. O usuário pode rodar uma lista respondendo as perguntas e no final ver sua pontuação.
+
+###Como rodar o projeto
+-Clone o projeto.
+-Na pasta raiz execute #yarn install
+-Em seguida #yarn start
+
+###Como rodar o emulador
+//falar como baixar o emulador.
+
+
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
+
+-
+
+
+
+
+
+
+
+
+----------------------------------------------------
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
 
