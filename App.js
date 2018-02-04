@@ -3,8 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import {TabNavigator} from 'react-navigation'
 import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
-import {FontAwesome} from '@expo/vector-icons'
-
+import Api from './utils/api'
 
  //mapeamento das views
   const Tabs = TabNavigator({
@@ -16,17 +15,23 @@ import {FontAwesome} from '@expo/vector-icons'
     },
   },
 );
-
+//let teste = 'valor inicial';
 
 export default class App extends React.Component {
 
-  //componentDidMount
+
+componentDidMount(){
+ // console.log('App.js -> componentDidMount()')
+
+// Api.fetchDecks
+}
 
   render() {
+
     return (
 
-       <Tabs style={styles.container} />
- 
+      <Tabs style={styles.container} />
+
     );
   }
 }
