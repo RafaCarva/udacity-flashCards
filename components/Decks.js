@@ -8,19 +8,21 @@ state = {
   allDecks:{}
 }
 
-componentDidMount(){
-  //console.log('Decks.js -> componentDidMount()')
-  this.setState({allDecks: fetchDecks()})
+componentDidMount = async() =>{
+  console.log('Decks.js -> componentDidMount()')
+  let temp = await fetchDecks()
+  console.log('TEMP-->',temp)
+  this.setState({allDecks: temp })
 }
 
   render() {
 
-console.log('--->', this.state.allDecks)
+//console.log('--->', this.state.allDecks)
     return (
       <View>
         {this.state.allDecks
         ?
-        <Text>3 TddODOS OS DECKS AQUI!</Text>
+        <Text>3 ODOS OS DECKS AQUI!</Text>
         :
         <Text>não tem deck</Text>
       }
