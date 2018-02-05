@@ -1,5 +1,6 @@
 import { AsyncStorage } from "react-native";
 
+
 export function fetchDecks(){
 
   //console.log('api.js -> fetchDecks()')
@@ -20,7 +21,7 @@ export function fetchDecks(){
 
 }
 
-export function saveDeck(deckName){
+export function saveDeck( ){
 //console.log('entrou em saveDeck ->',title)
 
 AsyncStorage
@@ -35,44 +36,21 @@ AsyncStorage
             'questions': []}
       ]
 
-console.log('------>',JSON.stringify(obj.allDecks))
+console.log('------>',JSON.stringify(obj))
 
 
-AsyncStorage.setItem("allDecks",JSON.stringify({obj}));
+AsyncStorage.setItem("allDecks",JSON.stringify(obj))
 
     }else{
       //já existe deck então vai só add mais esse 
-      console.log('-->vai add o deck no obj que já existe')
-      
+      console.log('-->vai add o deck no obj que já existe')      
+  
     }
-
   })
+}
+
+callbackSetItem =()=>{
+  console.log('callbackSetItem -> item adicionado!')
 
 }
 
-
-/*
-formato do json
-
-allDecks={
-  deck1:{
-    title:'deck1',
-    questions:[
-      {question:'pergunta1',answer:'resposta1'},
-      {question:'pergunta2',answer:'resposta2'},
-      {question:'pergunta3',answer:'resposta3'}
-    ]
-  }
-  deck2:{
-    title:'deck2',
-    questions:[
-      {question:'pergunta1',answer:'resposta1'},
-      {question:'pergunta2',answer:'resposta2'},
-      {question:'pergunta3',answer:'resposta3'}
-    ]
-  }
-
-}
-
-
-*/

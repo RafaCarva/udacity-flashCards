@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, AsyncStorage,TouchableHighlight  } from 'react-native'
 import {fetchDecks} from '../utils/api'
 
 class Decks extends Component {
@@ -8,31 +8,41 @@ state = {
   allDecks:{}
 }
 
-componentDidMount = async() =>{
+componentDidMount = () =>{
   console.log('Decks.js -> componentDidMount()')
-  let temp = await fetchDecks()
-  console.log('TEMP-->',temp)
-  this.setState({allDecks: temp })
+
+AsyncStorage.getItem('allDecks').then((data)=>{
+  if(data){
+    this.setState({allDecks:JSON.parse(data)})
+  }
+})
+
+
+  
 }
 
   render() {
 
-//console.log('--->', this.state.allDecks)
+console.log('**state.allDecks--->', this.state.allDecks)
     return (
       <View>
-        {this.state.allDecks
+        {
+        this.state.allDecks.length > 0
         ?
-        <Text>3 ODOS OS DECKS AQUI!</Text>
-        :
-        <Text>não tem deck</Text>
-      }
-
         
-       
+          this.state.allDecks.map((item,key)=>(
+            <Text key={key}>
+            nome do deck: {item.title}
+            </Text>
+
+          ))
+        
+        
+      :<Text>1 não tem deck</Text>}
+     
       </View>
     );
   }
 }
 
 export default Decks;
-

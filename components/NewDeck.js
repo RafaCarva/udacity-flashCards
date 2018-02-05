@@ -8,8 +8,6 @@ state={
 deckTitle:'',
 buttonDisabled:true
 }
-  
-
 
 onChangeTitle = (data) =>{
   this.setState({deckTitle: data})

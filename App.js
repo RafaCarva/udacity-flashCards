@@ -15,30 +15,24 @@ import Api from './utils/api'
     },
   },
 );
-//let teste = 'valor inicial';
+ const MainNavigator
 
+
+ 
 export default class App extends React.Component {
 
 
 componentDidMount(){
- // console.log('App.js -> componentDidMount()')
-
-// Api.fetchDecks
 }
-
   render() {
-
     return (
-
       <Tabs style={styles.container} />
-
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    
-    fontSize:20
+     fontSize:20
   },
 });
