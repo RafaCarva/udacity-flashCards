@@ -1,38 +1,52 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import {TabNavigator} from 'react-navigation'
-import Decks from './components/Decks'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import {TabNavigator,StackNavigator} from 'react-navigation'
+import DeckList from './components/Decklist'
 import NewDeck from './components/NewDeck'
-import Api from './utils/api'
 
- //mapeamento das views
-  const Tabs = TabNavigator({
-    Decks:{
-      screen: Decks,
+
+const Tabs=TabNavigator({
+    DeckList:{
+        screen:DeckList,
+        navigationOptions:{
+            tabBarLabel:'Decks'
+        }
     },
     NewDeck:{
-      screen:NewDeck,
-    },
-  },
-);
- const MainNavigator
+        screen:NewDeck,
+        navigationOptions:{
+            tabBarLabel:'New Deck'
+        }
+    }
+},{
+    tabBarOptions:{
+        activeTintColor:'yellow',
+        style:{
+            backgroundColor:'blue'
+        }
+    }
+})
+
+const MainNavigator=StackNavigator({
+    Home:{
+        screen:Tabs
+    }
+})
 
 
- 
 export default class App extends React.Component {
-
-
-componentDidMount(){
-}
   render() {
     return (
-      <Tabs style={styles.container} />
-    );
+          <MainNavigator/>
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-     fontSize:20
+    flex: 1,
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
