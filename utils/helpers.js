@@ -24,13 +24,22 @@ export function getDecks() {
                     answer:'The combination of a function and the lexical environment within which that function was declared.'
                 }
             ]
+        },
+        {
+            title:'Wordpress',
+            questions:[
+                {
+                    question:'What is a worpress?',
+                    answer:'A best cms.'
+                }
+            ]
         }
     ]
 }
 
-export function getDeck(id){
-   
-    getDecks().filter((result)=>result.id===id)
+export function getDeck(title){
+   console.log('-->helpers.js ',title)
+    return getDecks().filter((result)=>result.title===title)
 }
 
 export function saveDeckTitle(title){
