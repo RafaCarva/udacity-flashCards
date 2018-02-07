@@ -5,6 +5,7 @@ import {TabNavigator,StackNavigator} from 'react-navigation'
 import DeckList from './components/Decklist'
 import NewDeck from './components/NewDeck'
 import Deck from './components/Deck'
+import Quiz from './components/Quiz'
 //utils
 import {Constants} from 'expo'
 
@@ -47,6 +48,15 @@ const MainNavigator=StackNavigator({
         screen:Deck,
         navigationOptions:{
             headerTintColor:'white',
+            headerStyle:{
+                backgroundColor:'#5487FF'
+            }
+        }
+    },
+    Quiz:{
+        screen:Quiz,
+        navigationOptions:{
+            headerTintColor:'#fff',
             headerStyle:{
                 backgroundColor:'#5487FF'
             }
