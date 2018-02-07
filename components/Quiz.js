@@ -1,35 +1,57 @@
-
 import React from 'react'
-import {Text,View} from 'react-native'
+import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
 import {getDeck} from '../utils/helpers'
 
-class Quiz extends React.Component{
+class Deck extends React.Component {
 
-    static navigationOptions=({navigation})=>({
-        title:`Attempt ${navigation.state.params.card} Quiz`
+
+    static navigationOptions = ({navigation}) => ({
+        title: `${navigation.state.params.card}`
     })
 
-    constructor(props){
-        super(props)
-        this.state={
-            questions:[]
-        }
-    }
+    render() {
+        return (
+            <View style={styles.page}>
 
-    componentDidMount(){
-        console.log('-->Quiz props: ',this.props)
-        this.setState({
-            questions:getDeck(this.props.navigation.state.params.card)
-        })
-    }
+                {/*Título do deck*/}
+                <Text style={styles.title}>
+                    {this.props.navigation.state.params.card}
+                </Text>
 
-    render(){
-        return(
-            <View>
-                <Text>compnente quiz</Text>
+                {/*Adicionar card*/}
+                <TouchableOpacity style={styles.button}>
+                    <Text style={{color:'white'}}>Add Card</Text>
+                </TouchableOpacity>
+
+                {/*Iniciar quiz*/}
+                <TouchableOpacity style={styles.button}
+                                  onPress={() => this.props.navigation.navigate('Quiz', 
+                                  {card: this.props.navigation.state.params.card})}>
+                    <Text style={{color:'white'}}>Start Quiz</Text>
+                </TouchableOpacity>
+
+
             </View>
         )
     }
 }
 
-export default Quiz
+const styles=StyleSheet.create({
+    page:{
+        flex:1,
+        alignItems:'center',
+        flexDirection:'column'
+    },
+    title:{
+        fontSize:24,
+        textAlign:'center',
+        marginTop:30
+    },
+    button:{
+        backgroundColor:'blue',
+        padding:20,
+        margin:10
+    }
+})
+
+export default Deck
