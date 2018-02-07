@@ -13,7 +13,7 @@ class Decklist extends React.Component{
                 {cards.map(card=>(
                     <TouchableOpacity
                         style={styles.card}
-                        onPress={()=>this.props.navigation.navigate('Deck',{entryId:card.title})}
+                        onPress={()=>this.props.navigation.navigate('Deck',{card:card.title})}
                         key={card.title}>
 
                         <Text>{card.title}</Text>
