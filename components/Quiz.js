@@ -1,57 +1,151 @@
 import React from 'react'
-import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
+import {Text,View,StyleSheet,TouchableOpacity} from 'react-native'
 import {getDeck} from '../utils/helpers'
 
-class Deck extends React.Component {
+class Quiz extends React.Component{
 
 
-    static navigationOptions = ({navigation}) => ({
-        title: `${navigation.state.params.card}`
+    static navigationOptions=({navigation})=>({
+        title:`Attempt ${navigation.state.params.card} Quiz`
     })
 
-    render() {
-        return (
-            <View style={styles.page}>
 
-                {/*Título do deck*/}
-                <Text style={styles.title}>
-                    {this.props.navigation.state.params.card}
+
+    constructor(props){
+        super(props)
+        this.state={
+            details:[{questions:[]}],
+            currentQuestion:1,
+            showAnswer:false,
+            correct:0,
+            showFinish:false
+        }
+    }
+
+
+    componentDidMount(){
+        console.log('Quiz.js > componentDidMount() ',this.props)
+
+        //chamar getDeck passando o nome do card, o getDeck em helpers.js
+        // vai filtrar o resultadousando esse nome.
+        this.setState({
+            details:getDeck(this.props.navigation.state.params.card)
+        })
+    }
+
+
+
+    render(){
+        const {currentQuestion,details} = this.state
+        console.log('Quiz.js > render() > questão: ',details[0].questions)
+
+        return(
+            <View style={styles.container}>
+                <Text>
+                    {currentQuestion + '/' + details[0].questions.length}
+                </Text>
+                <Text style={styles.question}>
+                    {(details[0].questions.length>0)&&
+                        details[0].questions[currentQuestion-1].question
+                    }
                 </Text>
 
-                {/*Adicionar card*/}
-                <TouchableOpacity style={styles.button}>
-                    <Text style={{color:'white'}}>Add Card</Text>
+                {(this.state.showAnswer)
+                ?
+                    <TouchableOpacity
+                        onPress={()=>{this.setState({showAnswer:false})}}
+                    >
+                        <Text>Questão</Text>
+                    </TouchableOpacity>
+                :
+                    <TouchableOpacity
+                        onPress={()=>{this.setState({showAnswer:true})}}
+                    >
+                        <Text>Resposta</Text>
+                    </TouchableOpacity>
+                }
+                <Text style={{padding:20}}>
+                    {this.state.showAnswer&&
+                        details[0].questions[currentQuestion-1].answer
+                    }
+                </Text>
+                <TouchableOpacity
+                    style={[styles.button,{backgroundColor:'green'}]}
+                    onPress={()=>{
+                        if(details[0].questions.length>currentQuestion){
+                            this.setState({
+                                correct:this.state.correct+1,
+                                currentQuestion:this.state.currentQuestion+1
+                            })
+                        }
+                        else{
+                            this.setState({
+                                correct:this.state.correct+1,
+                                showFinish:true
+                            })
+                        }
+                    }}
+                >
+                    <Text>Sim</Text>
                 </TouchableOpacity>
 
-                {/*Iniciar quiz*/}
-                <TouchableOpacity style={styles.button}
-                                  onPress={() => this.props.navigation.navigate('Quiz', 
-                                  {card: this.props.navigation.state.params.card})}>
-                    <Text style={{color:'white'}}>Start Quiz</Text>
+
+                <TouchableOpacity
+                    style={[styles.button,{backgroundColor:'red'}]}
+                    onPress={()=>{
+                        if(details[0].questions.length>currentQuestion){
+                            this.setState({
+                                currentQuestion:this.state.currentQuestion+1
+                            })
+                        }
+                        else{
+                            this.setState({
+                                showFinish:true
+                            })
+                        }
+                    }}
+                >
+                    <Text>Não</Text>
                 </TouchableOpacity>
+                {(details[0].questions.length>currentQuestion)&&
+                    <TouchableOpacity
+                        onPress={()=>{this.setState({currentQuestion:this.state.currentQuestion+1})}}
+                    >
+                        <Text>Próximo</Text>
+                    </TouchableOpacity>
+                }
 
-
+                {(this.state.showFinish)&&
+                    <TouchableOpacity>
+                        <Text>Fim do Quiz</Text>
+                    </TouchableOpacity>
+                }
             </View>
         )
     }
 }
 
 const styles=StyleSheet.create({
-    page:{
+    container:{
         flex:1,
-        alignItems:'center',
-        flexDirection:'column'
+        flexDirection:'column',
+        alignItems:'center'
     },
-    title:{
+    question:{
         fontSize:24,
-        textAlign:'center',
-        marginTop:30
+        padding:20,
+        textAlign:'center'
     },
     button:{
-        backgroundColor:'blue',
-        padding:20,
-        margin:10
+        padding: 15,
+        paddingLeft: 35,
+        paddingRight: 35,
+        height: 45,
+        borderRadius: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin:15
     }
 })
 
-export default Deck
+export default Quiz

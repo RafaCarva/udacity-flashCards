@@ -18,7 +18,7 @@ class Deck extends React.Component{
                     </Text>
 
                     <TouchableOpacity style={styles.button}>
-                        <Text style={{color:'white'}}>Add Card</Text>
+                        <Text style={{color:'white'}}>Add Cardddddd</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.button} 
