@@ -47,7 +47,7 @@ class Decklist extends React.Component{
                         key={card.title}
                     >
                         {console.log(card)}
-                        <Text>{card.title}</Text>
+                        <Text style={styles.title}>{card.title}</Text>
                         <Text>{card.questions.length} {(card.questions.length>1)?'cards':'card'}</Text>
                     </TouchableOpacity>
                 ))}
@@ -59,9 +59,13 @@ class Decklist extends React.Component{
 const styles=StyleSheet.create({
     card:{
         borderBottomWidth:2,
-        borderBottomColor:'#000',
+        borderBottomColor:'grey',
         alignItems:'center',
-        padding:15
+        padding:15,
+        margin:5
+    },
+    title:{
+        fontWeight:'bold'
     }
 })
 

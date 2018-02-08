@@ -1,22 +1,19 @@
 import React from 'react'
 import {View,Text,StyleSheet,TextInput,TouchableOpacity} from 'react-native'
 import {saveDeckTitle} from '../utils/helpers'
+import {Constants} from 'expo'
 
 class NewDeck extends React.Component{
     state={
         title:''
     }
     render(){
-
-        console.log('NewDeck.js > state>',this.state)
-
-
         return(
             <View style={styles.container}>
                 <Text>New Deck!</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder='Título do novo deck'
+                    placeholder='Titulo do novo deck'
                     value={this.state.title}
                     onChangeText={(text)=>{this.setState({title:text})}}
                 />
@@ -39,8 +36,8 @@ const styles=StyleSheet.create({
         padding:20
     },
     input:{
-        width:200,
-        padding:10
+        padding:10,
+        alignSelf:'stretch'
     },
     button:{
         padding: 10,
