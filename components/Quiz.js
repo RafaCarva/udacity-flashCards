@@ -31,9 +31,14 @@ class Quiz extends React.Component{
                 <Text>
                     {currentQuestion + '/' + details[0].questions.length}
                 </Text>
+
                 <Text style={styles.question}>
-                    {(details[0].questions.length>0)&&
+                    {(!this.state.showAnswer)
+                    ?
+                        (details[0].questions.length>0)&&
                         details[0].questions[currentQuestion-1].question
+                    :
+                    details[0].questions[currentQuestion-1].answer
                     }
                 </Text>
                 {(this.state.showAnswer)?
@@ -48,11 +53,7 @@ class Quiz extends React.Component{
                         <Text>Answer</Text>
                     </TouchableOpacity>
                 }
-                <Text style={{padding:20}}>
-                    {this.state.showAnswer&&
-                        details[0].questions[currentQuestion-1].answer
-                    }
-                </Text>
+                
                 <TouchableOpacity
                     style={[styles.button,{backgroundColor:'green'}]}
                     onPress={()=>{
