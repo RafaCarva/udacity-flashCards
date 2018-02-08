@@ -6,6 +6,7 @@ import DeckList from './components/Decklist'
 import NewDeck from './components/NewDeck'
 import Deck from './components/Deck'
 import Quiz from './components/Quiz'
+import Finish from './components/Finish'
 //utils
 import {Constants} from 'expo'
 
@@ -61,7 +62,17 @@ const MainNavigator=StackNavigator({
                 backgroundColor:'#5487FF'
             }
         }
+    },
+    Finish:{
+        screen:Finish,
+        navigationOptions:{
+            headerTintColor:'#fff',
+            headerStyle:{
+                backgroundColor:'#b71845'
+            }
+        }
     }
+
 })
 
 function UdaciStatusBar({backgroundColor,...props}){

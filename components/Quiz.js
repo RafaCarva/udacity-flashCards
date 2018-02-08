@@ -86,7 +86,10 @@ class Quiz extends React.Component{
                         }
                     }}
                 >
-                    <Text>Sim</Text>
+                    <Text style={styles.buttonText}>Correto!</Text>
+
+
+
                 </TouchableOpacity>
 
 
@@ -105,7 +108,11 @@ class Quiz extends React.Component{
                         }
                     }}
                 >
-                    <Text>Não</Text>
+                    <Text style={styles.buttonText}>
+                        incorreto
+                    </Text>
+
+                    
                 </TouchableOpacity>
                 {(details[0].questions.length>currentQuestion)&&
                     <TouchableOpacity
@@ -116,9 +123,13 @@ class Quiz extends React.Component{
                 }
 
                 {(this.state.showFinish)&&
-                    <TouchableOpacity>
-                        <Text>Fim do Quiz</Text>
-                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={()=>{
+                            this.props.navigation.navigate('Finish',{score:this.state.correct,maximum:this.state.details[0].questions.length})
+                        }}
+                    >
+                        <Text>Finish</Text>
+                   </TouchableOpacity>
                 }
             </View>
         )
@@ -145,6 +156,9 @@ const styles=StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin:15
+    },
+    buttonText:{
+        color:'white'
     }
 })
 
