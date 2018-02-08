@@ -1,15 +1,57 @@
 import React from 'react'
-import {View,Text} from 'react-native'
+import {View,Text,StyleSheet,TextInput,TouchableOpacity} from 'react-native'
+import {saveDeckTitle} from '../utils/helpers'
 
 class NewDeck extends React.Component{
+    state={
+        title:''
+    }
     render(){
+
+        console.log('NewDeck.js > state>',this.state)
+
+
         return(
-            <View>
+            <View style={styles.container}>
                 <Text>New Deck!</Text>
-                <Text>What the name of your new deck?</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Título do novo deck'
+                    value={this.state.title}
+                    onChangeText={(text)=>{this.setState({title:text})}}
+                />
+                <TouchableOpacity
+                    style={[styles.button,{backgroundColor:'green'}]}
+                    onPress={()=>{saveDeckTitle(this.state.title)}}
+                >
+                    <Text style={{color:'white'}}>Enviar</Text>
+                </TouchableOpacity>
             </View>
         )
     }
 }
+
+const styles=StyleSheet.create({
+    container:{
+        flex:2,
+        flexDirection:'column',
+        alignItems:'center',
+        padding:20
+    },
+    input:{
+        width:200,
+        padding:10
+    },
+    button:{
+        padding: 10,
+        paddingLeft: 30,
+        paddingRight: 30,
+        height: 45,
+        borderRadius: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin:10
+    }
+})
 
 export default NewDeck
