@@ -29,7 +29,7 @@ class Deck extends React.Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button,{backgroundColor:'blue'}]}
-                    onPress={() => this.props.navigation.navigate('Quiz', {card: this.props.navigation.state.params.card})}
+                    onPress={() => this.props.navigation.navigate('Quiz', {card: this.props.navigation.state.params.card,count:this.props.navigation.state.params.count})}
                 >
                     <Text style={{color:'white'}}>Start Quiz</Text>
                 </TouchableOpacity>

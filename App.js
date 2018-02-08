@@ -1,13 +1,16 @@
 import React from 'react';
 import { StyleSheet, StatusBar, View } from 'react-native';
 import {TabNavigator,StackNavigator} from 'react-navigation'
+import {Constants} from 'expo'
+//componentes
 import DeckList from './components/Decklist'
 import NewDeck from './components/NewDeck'
 import Deck from './components/Deck'
 import Quiz from './components/Quiz'
-import {Constants} from 'expo'
 import Finish from './components/Finish'
 import NewQuestion from './components/NewQuestion'
+import {setLocalNotification} from './utils/helpers'
+
 
 const Tabs=TabNavigator({
     DeckList:{
@@ -89,7 +92,16 @@ function UdaciStatusBar({backgroundColor,...props}) {
     )
 }
 
+
+
+
 export default class App extends React.Component {
+
+componentDidMount(){
+    console.log('App.js componentDidMount')
+    setLocalNotification()
+}
+
   render() {
     return (
         <View style={{flex:1}}>

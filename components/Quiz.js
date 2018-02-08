@@ -1,6 +1,6 @@
 import React from 'react'
 import {Text,View,StyleSheet,TouchableOpacity} from 'react-native'
-import {getDeck} from '../utils/helpers'
+import {getDeck,clearLocalNotification,setLocalNotification} from '../utils/helpers'
 
 class Quiz extends React.Component{
     static navigationOptions=({navigation})=>({
@@ -109,7 +109,9 @@ class Quiz extends React.Component{
                 {(this.state.showFinish)&&
                     <TouchableOpacity
                         onPress={()=>{
-                            this.props.navigation.navigate('Finish',{score:this.state.correct,maximum:this.state.details[0].questions.length,card:this.props.navigation.state.params.card})
+                            this.props.navigation.navigate('Finish',{score:this.state.correct,maximum:this.state.details[0].questions.length,card:this.props.navigation.state.params.card,count:this.props.navigation.state.params.count})
+                            clearLocalNotification()
+                                .then(setLocalNotification)
                         }}
                     >
                         <Text>Finish</Text>
