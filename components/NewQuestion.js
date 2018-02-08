@@ -27,10 +27,13 @@ class NewQuestion extends React.Component{
                 />
                 <TouchableOpacity
                     style={[styles.button,{backgroundColor:'green'}]}
-                    onPress={()=>{addCardToDeck(this.props.navigation.state.params.card,this.state.question,this.state.answer)}}
+                    onPress={()=>{
+                        addCardToDeck(this.props.navigation.state.params.card,this.state.question,this.state.answer)
+                        this.props.navigation.navigate('Deck',{card:this.props.navigation.state.params.card,count:this.props.navigation.state.params.count+1})
+                    }}
                 >
                     <Text style={{color:'white'}}>Submit</Text>
-                </TouchableOpacity>
+</TouchableOpacity>
             </View>
         )
     }
