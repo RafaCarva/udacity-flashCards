@@ -15,9 +15,10 @@ class Decklist extends React.Component{
             cards:Object.keys(cards).map((card)=>(cards[card]))
         })
     }
+
     render(){
         const cards=getDecks()
-        console.log(cards)
+        console.log('DeckList.js > cards resultado de getDecks:',cards)
         return(
             <View>
                 {this.state.cards.map(card=>(
@@ -30,7 +31,7 @@ class Decklist extends React.Component{
                         <Text>{card.questions.length} {(card.questions.length>1)?'cards':'card'}</Text>
                     </TouchableOpacity>
                 ))}
-                <Text>Hello!</Text>
+                <Text>VEJA O CARDS:</Text>
                 <Text>{JSON.stringify(cards)}</Text>
                 <Text>{JSON.stringify(Object.keys(cards).map((card)=>(cards[card])))}</Text>
             </View>
