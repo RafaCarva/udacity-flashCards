@@ -47,18 +47,23 @@ class Deck extends React.Component {
                     >
                         <Text style={{color:'white'}}>Add Card</Text>
                     </TouchableOpacity>
+
                     <TouchableOpacity
                         style={[styles.button,{backgroundColor:'blue'}]}
                         onPress={() => this.props.navigation.navigate('Quiz', {card:this.props.navigation.state.params.card,count:this.state.details[0].questions.length})}
                     >
                         <Text style={{color:'white'}}>Start Quiz</Text>
                     </TouchableOpacity>
-                    {/*<TouchableOpacity*/}
-                        {/*style={[styles.button,{backgroundColor:'green'}]}*/}
-                        {/*onPress={this.onRefresh}*/}
-                    {/*>*/}
-                        {/*<Text style={styles.buttonText}>Refresh</Text>*/}
-                    {/*</TouchableOpacity>*/}
+
+                    <TouchableOpacity
+                        style={[styles.button,{backgroundColor:'blue'}]}
+                        onPress={() => this.props.navigation.navigate('Home')}
+                    >
+                        <Text style={{color:'white'}}>Home</Text>
+                    </TouchableOpacity>
+
+
+
             </View>
         )
     }

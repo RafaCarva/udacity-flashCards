@@ -56,7 +56,7 @@ class Decklist extends React.Component{
                         />
                     }
                 >
-                    {this.state.cards.map(card=>(
+                    {cards.map(card=>(
                         <TouchableOpacity
                             style={styles.card}
                             onPress={()=>this.props.navigation.navigate('Deck',{card:card.title,count:card.questions.length})}
