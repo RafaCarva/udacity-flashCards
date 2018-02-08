@@ -1,15 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StyleSheet, StatusBar, View } from 'react-native';
 import {TabNavigator,StackNavigator} from 'react-navigation'
-//components
 import DeckList from './components/Decklist'
 import NewDeck from './components/NewDeck'
 import Deck from './components/Deck'
 import Quiz from './components/Quiz'
-import Finish from './components/Finish'
-//utils
 import {Constants} from 'expo'
-
+import Finish from './components/Finish'
+import NewQuestion from './components/NewQuestion'
 
 const Tabs=TabNavigator({
     DeckList:{
@@ -26,21 +24,20 @@ const Tabs=TabNavigator({
     }
 },{
     tabBarOptions:{
-        activeTintColor:'yellow',
+        activeTintColor:'#fff',
         style:{
-            backgroundColor:'blue'
+            backgroundColor:'#b71845'
         }
     }
 })
 
-//aqui eu seto o mapeamento para as paginas
 const MainNavigator=StackNavigator({
     Home:{
         screen:Tabs,
         navigationOptions:{
             headerTintColor:'#fff',
             headerStyle:{
-                backgroundColor:'#5487FF'
+                backgroundColor:'#b71845'
             },
             title:'FlashCards'
         }
@@ -48,9 +45,9 @@ const MainNavigator=StackNavigator({
     Deck:{
         screen:Deck,
         navigationOptions:{
-            headerTintColor:'white',
+            headerTintColor:'#fff',
             headerStyle:{
-                backgroundColor:'#5487FF'
+                backgroundColor:'#b71845'
             }
         }
     },
@@ -59,7 +56,7 @@ const MainNavigator=StackNavigator({
         navigationOptions:{
             headerTintColor:'#fff',
             headerStyle:{
-                backgroundColor:'#5487FF'
+                backgroundColor:'#b71845'
             }
         }
     },
@@ -71,25 +68,32 @@ const MainNavigator=StackNavigator({
                 backgroundColor:'#b71845'
             }
         }
+    },
+    NewQuestion:{
+        screen:NewQuestion,
+        navigationOptions:{
+            headerTintColor:'#fff',
+            headerStyle:{
+                backgroundColor:'#b71845'
+            }
+        }
     }
-
 })
 
-function UdaciStatusBar({backgroundColor,...props}){
-return(
-    <View style={{backgroundColor:backgroundColor,height:Constants.statusBarHeight}}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props}/>
-    </View>
-)
+function UdaciStatusBar({backgroundColor,...props}) {
+    return(
+        <View style={{backgroundColor:backgroundColor,height:Constants.statusBarHeight}}>
+            <StatusBar translucent backgroundColor={backgroundColor} {...props}/>
+        </View>
+    )
 }
-
 
 export default class App extends React.Component {
   render() {
     return (
         <View style={{flex:1}}>
-            <UdaciStatusBar backgroundColor='orange'/>
-          <MainNavigator/>
+            <UdaciStatusBar backgroundColor="#b71845"/>
+            <MainNavigator/>
         </View>
     )
   }
@@ -98,8 +102,8 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-});
+  }
+})

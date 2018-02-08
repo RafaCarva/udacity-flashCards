@@ -1,40 +1,57 @@
 import React from 'react'
-import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
+import {Text,StyleSheet,TouchableOpacity,ScrollView,RefreshControl} from 'react-native'
 import {getDecks} from '../utils/helpers'
 
 class Decklist extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            cards:[]
+            cards:[{title:'',questions:[]}],
+            refreshing:false
         }
     }
     componentDidMount(){
-        const cards=getDecks()
-        this.setState({
-            cards:Object.keys(cards).map((card)=>(cards[card]))
+        getDecks().then(data=>{
+            console.log(data)
+            this.setState({
+                cards:Object.keys(data).map((key)=>(data[key]))
+            })
+        })
+    }
+    _onRefresh() {
+        this.setState({refreshing: true});
+        getDecks().then(data=>{
+            console.log(data)
+            this.setState({
+                cards:Object.keys(data).map((key)=>(data[key])),
+                refreshing:false
+            })
         })
     }
 
     render(){
-        const cards=getDecks()
-        console.log('DeckList.js > cards resultado de getDecks:',cards)
+        const {cards}=this.state
         return(
-            <View>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh.bind(this)}
+                    />
+                }
+            >
                 {this.state.cards.map(card=>(
                     <TouchableOpacity
                         style={styles.card}
                         onPress={()=>this.props.navigation.navigate('Deck',{card:card.title})}
                         key={card.title}
                     >
+                        {console.log(card)}
                         <Text>{card.title}</Text>
                         <Text>{card.questions.length} {(card.questions.length>1)?'cards':'card'}</Text>
                     </TouchableOpacity>
                 ))}
-                <Text>VEJA O CARDS:</Text>
-                <Text>{JSON.stringify(cards)}</Text>
-                <Text>{JSON.stringify(Object.keys(cards).map((card)=>(cards[card])))}</Text>
-            </View>
+            </ScrollView>
         )
     }
 }

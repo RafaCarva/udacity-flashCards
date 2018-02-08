@@ -1,33 +1,33 @@
+
 import React from 'react'
 import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
 import {getDeck} from '../utils/helpers'
 
-class Deck extends React.Component{
-
-    static navigationOptions=({navigation})=>({
-        title:`${navigation.state.params.card}`
+class Deck extends React.Component {
+    static navigationOptions = ({navigation}) => ({
+        title: `${navigation.state.params.card}`
     })
-
-    render(){
-
-        return(
-                <View style={styles.page}>
-
-                    <Text style={styles.title}>
-                        {this.props.navigation.state.params.card}
-                    </Text>
-
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={{color:'white'}}>Add Cardddddd</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.button} 
-                    onPress={()=>this.props.navigation.navigate('Quiz',{card:this.props.navigation.state.params.card})}>
-                        <Text style={{color:'white'}}>Start Quiz</Text>
-                    </TouchableOpacity>
-                </View>
-            )
-}
+    render() {
+        return (
+            <View style={styles.page}>
+                <Text style={styles.title}>
+                    {this.props.navigation.state.params.card}
+                </Text>
+                <TouchableOpacity
+                    style={[styles.button,{backgroundColor:'blue'}]}
+                    onPress={()=>{this.props.navigation.navigate('NewQuestion',{card: this.props.navigation.state.params.card})}}
+                >
+                    <Text style={{color:'white'}}>Add Card</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.button,{backgroundColor:'blue'}]}
+                    onPress={() => this.props.navigation.navigate('Quiz', {card: this.props.navigation.state.params.card})}
+                >
+                    <Text style={{color:'white'}}>Start Quiz</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 }
 
 const styles=StyleSheet.create({
@@ -42,9 +42,17 @@ const styles=StyleSheet.create({
         marginTop:30
     },
     button:{
-        backgroundColor:'blue',
-        padding:20,
+        padding: 10,
+        paddingLeft: 30,
+        paddingRight: 30,
+        height: 45,
+        borderRadius: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
         margin:10
+    },
+    buttonText:{
+        color:'white'
     }
 })
 
