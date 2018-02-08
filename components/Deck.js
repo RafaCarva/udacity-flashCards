@@ -10,9 +10,17 @@ class Deck extends React.Component {
     render() {
         return (
             <View style={styles.page}>
+
+
+
                 <Text style={styles.title}>
                     {this.props.navigation.state.params.card}
                 </Text>
+
+                <Text>
+                    {this.props.navigation.state.params.count} {this.props.navigation.state.params.count>1?'cards':'card'} in the deck.
+                </Text>
+
                 <TouchableOpacity
                     style={[styles.button,{backgroundColor:'blue'}]}
                     onPress={()=>{this.props.navigation.navigate('NewQuestion',{card: this.props.navigation.state.params.card})}}

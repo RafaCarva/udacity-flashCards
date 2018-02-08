@@ -45,7 +45,7 @@ export function getDecks() {
         }
         else{
             AsyncStorage.setItem(flashkey,JSON.stringify(decks))
-            
+
             return AsyncStorage.getItem(flashkey).then((data)=>{
                 console.log(data)
                 return JSON.parse(data)
@@ -70,7 +70,7 @@ export function getDeck(title){
 export function saveDeckTitle(title){
     // Adds a new deck.
     console.log(title)
-    AsyncStorage.mergeItem(
+    return AsyncStorage.mergeItem(
         flashkey,
         JSON.stringify({[title]:{
             title,

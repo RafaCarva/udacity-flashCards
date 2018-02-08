@@ -19,7 +19,11 @@ class NewDeck extends React.Component{
                 />
                 <TouchableOpacity
                     style={[styles.button,{backgroundColor:'green'}]}
-                    onPress={()=>{saveDeckTitle(this.state.title)}}
+                    onPress={()=>{
+                        saveDeckTitle(this.state.title).then(()=>{
+                            this.props.navigation.navigate('Deck',{card:this.state.title,count:0})
+                        })
+                    }}
                 >
                     <Text style={{color:'white'}}>Enviar</Text>
                 </TouchableOpacity>

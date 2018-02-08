@@ -109,7 +109,7 @@ class Quiz extends React.Component{
                 {(this.state.showFinish)&&
                     <TouchableOpacity
                         onPress={()=>{
-                            this.props.navigation.navigate('Finish',{score:this.state.correct,maximum:this.state.details[0].questions.length})
+                            this.props.navigation.navigate('Finish',{score:this.state.correct,maximum:this.state.details[0].questions.length,card:this.props.navigation.state.params.card})
                         }}
                     >
                         <Text>Finish</Text>
