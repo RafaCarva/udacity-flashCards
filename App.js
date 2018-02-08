@@ -40,7 +40,8 @@ const MainNavigator=StackNavigator({
                 backgroundColor:'#b71845'
             },
             title:'FlashCards'
-        }
+        },
+        animationEnabled:true
     },
     Deck:{
         screen:Deck,

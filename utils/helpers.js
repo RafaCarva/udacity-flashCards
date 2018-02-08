@@ -39,12 +39,17 @@ const flashkey='@flashkard:key'
 export function getDecks() {
     // List of all decks. Titles, Questions and Answers.
     return AsyncStorage.getItem(flashkey).then((data) => {
-        console.log(data)
+        console.log('dados do helper',data)
         if(JSON.parse(data)!==null) {
             return JSON.parse(data)
         }
         else{
             AsyncStorage.setItem(flashkey,JSON.stringify(decks))
+            
+            return AsyncStorage.getItem(flashkey).then((data)=>{
+                console.log(data)
+                return JSON.parse(data)
+            })
         }
     })
 
