@@ -3,6 +3,7 @@ import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
 import {getDeck} from '../utils/helpers'
 
 class Deck extends React.Component {
+
     static navigationOptions = ({navigation}) => ({
         title: `${navigation.state.params.card}`
     })
@@ -13,6 +14,7 @@ class Deck extends React.Component {
             }
         ]
     }
+
     getDetails=()=>{
         getDeck(this.props.navigation.state.params.card).then((data)=>{
             this.setState({
@@ -20,46 +22,54 @@ class Deck extends React.Component {
             })
         })
     }
+
     componentDidMount(){
         this.getDetails()
     }
+
     onRefresh=()=>{
         this.getDetails()
     }
+
     render() {
         return (
             <View style={styles.page}>
+               
+               {/*'cards' é um dos parâmetros passados quando ocorreu o redirect na tela de criação de um novo card (veja NewDeck.js) --> this.props.navigation.navigate('Deck',{card:this.state.title,count:0}*/}
                 <Text style={styles.title}>
                     {this.props.navigation.state.params.card}
                 </Text>
+
+                {/*'count=0 foi o outro parâmetro'*/}
                 <Text>
-                    {this.props.navigation.state.params.count?
-                        (this.props.navigation.state.params.count+(this.props.navigation.state.params.count>1?' cards in the deck':' card in the deck'))
+                    {this.props.navigation.state.params.count
+                    ?
+                        (this.props.navigation.state.params.count+(this.props.navigation.state.params.count>1
+                            ?' cards no deck'
+                            :' card no deck'))
                     :
-                        //(this.state.details[0].questions.length+(this.state.details[0].questions.length>1?' cards in the deck':' card in the deck'))
-                        'Hello!'
-                        // {this.state.details[0].questions.length} {this.state.details[0].questions.length>1?'cards':'card'} in the deck.
+                            'Seleciona uma ação:'
                     }
                 </Text>
                     <TouchableOpacity
                         style={[styles.button,{backgroundColor:'blue'}]}
                         onPress={()=>{this.props.navigation.navigate('NewQuestion',{card: this.props.navigation.state.params.card,count:this.state.details[0].questions.length})}}
                     >
-                        <Text style={{color:'white'}}>Add Card</Text>
+                        <Text style={{color:'white'}}>Adicionar Card</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={[styles.button,{backgroundColor:'blue'}]}
                         onPress={() => this.props.navigation.navigate('Quiz', {card:this.props.navigation.state.params.card,count:this.state.details[0].questions.length})}
                     >
-                        <Text style={{color:'white'}}>Start Quiz</Text>
+                        <Text style={{color:'white'}}>Iniciar Quiz</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={[styles.button,{backgroundColor:'blue'}]}
                         onPress={() => this.props.navigation.navigate('Home')}
                     >
-                        <Text style={{color:'white'}}>Home</Text>
+                        <Text style={{color:'white'}}>Voltar</Text>
                     </TouchableOpacity>
 
 

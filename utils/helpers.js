@@ -65,10 +65,12 @@ export function getDeck(title){
     })
 }
 
-
+/**
+ * Essa função será chamada ao setar o título de um novo deck
+ */
 export function saveDeckTitle(title){
-    // Adds a new deck.
-    console.log(title)
+    
+    //'mergeItem' vai incrementar o objeto no storage com esse objeto montado no 2ª atributo enviado.
     return AsyncStorage.mergeItem(
         flashkey,
         JSON.stringify({[title]:{
@@ -79,11 +81,12 @@ export function saveDeckTitle(title){
 }
 
 
-
+/**
+*Essa função será chamada em NewQuestions.js quando se clicar no submit da nova pergunta criada.
+*/
 export function addCardToDeck(title, question,answer){
-    // Adds a question to the title.
-    // Hope and pray this works.
-    console.log(title,question,answer)
+
+   // console.log(title,question,answer)
     getDeck(title).then(data=>{
         const allOtherQuestions=data
         console.log('All other questions',allOtherQuestions[0].questions)
@@ -122,8 +125,8 @@ export function clearLocalNotification() {
 
 export function createNotification() {
     return{
-        title:"Take your dose of cards for today!",
-        body:"You haven't taken even one Quiz today!",
+        title:"Que tal fazedr um quiz hoje?",
+        body:"Você não fez nenhum quiz hoje!",
         android:{
             sound:true,
             priority:'high',
@@ -133,11 +136,15 @@ export function createNotification() {
     }
 }
 
+/**
+ * setLocalNotification() será chamado ao iniciar o app (no componentDidMount de app.js)
+ */
 export function setLocalNotification() {
-    console.log('Inside setLocalNotification')
+    console.log('helpers.js > setLocalNotification()')
+
     AsyncStorage.getItem(NOTIFICATION_KEY)
         .then((data)=>{
-            console.log(data)
+            //console.log('-->retorno do getItem :', data)
             return JSON.parse(data)
         })
         .then(data=>{
@@ -152,6 +159,8 @@ export function setLocalNotification() {
                             tomorrow.setMinutes(0)
 
                             Notifications.scheduleLocalNotificationAsync(
+                                
+                                //vai retornar os dados da notificação 
                                 createNotification(),
                                 {
                                     time:tomorrow,

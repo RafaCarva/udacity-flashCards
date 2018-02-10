@@ -9,9 +9,15 @@ import Deck from './components/Deck'
 import Quiz from './components/Quiz'
 import Finish from './components/Finish'
 import NewQuestion from './components/NewQuestion'
+
 import {setLocalNotification} from './utils/helpers'
 
 
+
+/**
+ * TabNavigatoe é apenas a estrutura de abas, no caso de Tabs ela vai estar dentro
+ * da screen Home que será setada em StackNavigator.
+ */
 const Tabs=TabNavigator({
     DeckList:{
         screen:DeckList,
@@ -29,20 +35,23 @@ const Tabs=TabNavigator({
     tabBarOptions:{
         activeTintColor:'#fff',
         style:{
-            backgroundColor:'#b71845'
+            backgroundColor:'#2D93FF'
         }
     }
 })
 
+/**
+ * mapeamento das telas
+ */
 const MainNavigator=StackNavigator({
     Home:{
         screen:Tabs,
         navigationOptions:{
             headerTintColor:'#fff',
             headerStyle:{
-                backgroundColor:'#b71845'
+                backgroundColor:'#0078FD'
             },
-            title:'FlashCards'
+            title:'Flash Cards'
         },
         animationEnabled:true
     },
@@ -51,7 +60,7 @@ const MainNavigator=StackNavigator({
         navigationOptions:{
             headerTintColor:'#fff',
             headerStyle:{
-                backgroundColor:'#b71845'
+                backgroundColor:'#0078FD'
             }
         }
     },
@@ -60,7 +69,7 @@ const MainNavigator=StackNavigator({
         navigationOptions:{
             headerTintColor:'#fff',
             headerStyle:{
-                backgroundColor:'#b71845'
+                backgroundColor:'#0078FD'
             }
         }
     },
@@ -69,7 +78,7 @@ const MainNavigator=StackNavigator({
         navigationOptions:{
             headerTintColor:'#fff',
             headerStyle:{
-                backgroundColor:'#b71845'
+                backgroundColor:'#0078FD'
             }
         }
     },
@@ -78,35 +87,40 @@ const MainNavigator=StackNavigator({
         navigationOptions:{
             headerTintColor:'#fff',
             headerStyle:{
-                backgroundColor:'#b71845'
+                backgroundColor:'#0078FD'
             }
         }
     }
 })
 
+/**
+ * 
+ * Esse é o componente que será o topo do app
+ * (na camada de baixo onde aparece a hora/bateria etc)
+ */
 function UdaciStatusBar({backgroundColor,...props}) {
+    //console.log('------------>',Constants.statusBarHeight)
     return(
-        <View style={{backgroundColor:backgroundColor,height:Constants.statusBarHeight}}>
+        <View style={{backgroundColor:backgroundColor,
+                      height:Constants.statusBarHeight}}>
             <StatusBar translucent backgroundColor={backgroundColor} {...props}/>
         </View>
     )
 }
 
 
-
-
 export default class App extends React.Component {
 
 
 componentDidMount(){
-    console.log('App.js componentDidMount')
+    console.log('App.js > componentDidMount')
     setLocalNotification()
 }
 
   render() {
     return (
         <View style={{flex:1}}>
-            <UdaciStatusBar backgroundColor="#b71845"/>
+            <UdaciStatusBar backgroundColor="gray"/>
             <MainNavigator/>
         </View>
     )

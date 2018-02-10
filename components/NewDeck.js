@@ -10,7 +10,8 @@ class NewDeck extends React.Component{
     render(){
         return(
             <View style={styles.container}>
-                <Text>New Deck!</Text>
+
+                <Text>Novo Deck!</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Titulo do novo deck'
@@ -27,6 +28,7 @@ class NewDeck extends React.Component{
                 >
                     <Text style={{color:'white'}}>Enviar</Text>
                 </TouchableOpacity>
+
             </View>
         )
     }
@@ -40,7 +42,7 @@ const styles=StyleSheet.create({
         padding:20
     },
     input:{
-        padding:10,
+        padding:15,
         alignSelf:'stretch'
     },
     button:{
