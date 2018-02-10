@@ -28,7 +28,7 @@ const Tabs=TabNavigator({
     NewDeck:{
         screen:NewDeck,
         navigationOptions:{
-            tabBarLabel:'New Deck'
+            tabBarLabel:'Novo Deck'
         }
     }
 },{
@@ -120,7 +120,7 @@ componentDidMount(){
   render() {
     return (
         <View style={{flex:1}}>
-            <UdaciStatusBar backgroundColor="gray"/>
+            <UdaciStatusBar backgroundColor="#0078FD"/>
             <MainNavigator/>
         </View>
     )

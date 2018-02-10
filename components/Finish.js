@@ -2,12 +2,15 @@ import React from 'react'
 import {Text,View,StyleSheet,TouchableOpacity} from 'react-native'
 
 class Finish extends React.Component{
+   
     static navigationOptions=({navigation})=>({
-        title:'Quiz Done!'
+        title:'Fim do Quiz!'
     })
+
     state={
         percentage:0
     }
+
     componentDidMount(){
         this.setState({
             percentage:this.props.navigation.state.params.score/this.props.navigation.state.params.maximum * 100
@@ -15,41 +18,44 @@ class Finish extends React.Component{
     }
     showCompliment=(percent)=>{
         if(percent<20){
-            return 'You need to be better!'
+            return 'Ruim!'
         }
         if(percent<50){
-            return 'You could be better!'
+            return 'Poderia ser melhor!'
         }
         if(percent<80){
-            return 'That was good!'
+            return 'Muito bom!'
         }
         else{
-            return 'Genius!'
+            return 'Genial!'
         }
     }
     render(){
         console.log(this.props.navigation.state.params)
         return(
             <View style={styles.container}>
-                <Text style={{fontSize:24,textAlign:'center'}}>Hello, {this.showCompliment(this.state.percentage)}</Text>
-                <Text style={{textAlign:'center'}}> You have scored: </Text>
+                <Text style={{fontSize:24,textAlign:'center'}}>\o/ {this.showCompliment(this.state.percentage)}</Text>
+                <Text style={{textAlign:'center'}}> Sua pontuação: </Text>
                 <View style={styles.score}>
                     <Text style={{textAlign:'center',fontSize:64}}>{this.props.navigation.state.params.score} / {this.props.navigation.state.params.maximum}</Text>
                 </View>
+                
                 <View>
-                    <Text style={{textAlign:'center'}}>That means you scored {this.state.percentage} %</Text>
+                    <Text style={{textAlign:'center'}}>Você acertou: {this.state.percentage} %</Text>
                 </View>
+
                 <TouchableOpacity
                     onPress={()=>this.props.navigation.navigate('Quiz',{card:this.props.navigation.state.params.card})}
                     style={[styles.button,{backgroundColor:'green'}]}
                 >
-                    <Text style={styles.buttonText}>Start Over</Text>
+                    <Text style={styles.buttonText}>Responder novamente</Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity
                     onPress={()=>this.props.navigation.navigate('Deck',{card:this.props.navigation.state.params.card,count:this.props.navigation.state.params.count})}
                     style={[styles.button,{backgroundColor:'green'}]}
                 >
-                    <Text style={styles.buttonText}>Go to {this.props.navigation.state.params.card}</Text>
+                    <Text style={styles.buttonText}>Voltar para {this.props.navigation.state.params.card}</Text>
                 </TouchableOpacity>
             </View>
         )

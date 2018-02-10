@@ -7,9 +7,11 @@ import {
 } from '../utils/helpers';
 
 class Quiz extends React.Component {
+
   static navigationOptions = ({navigation}) => ({
-    title: `Attempt ${navigation.state.params.card} Quiz`,
+    title: `${navigation.state.params.card} Quiz`,
   });
+
   constructor (props) {
     super (props);
     this.state = {
@@ -21,6 +23,8 @@ class Quiz extends React.Component {
     };
   }
   componentDidMount () {
+    //retorna apenas o card recebido como 'card'.
+    //então seta as questões no state 'details'.
     getDeck (this.props.navigation.state.params.card).then (data => {
       this.setState ({
         details: data,
@@ -45,7 +49,7 @@ class Quiz extends React.Component {
   };
 
   render () {
-    console.log (this.state);
+    //console.log (this.state);
     const {currentQuestion, details} = this.state;
     return (
       <View style={styles.container}>
@@ -65,14 +69,14 @@ class Quiz extends React.Component {
                 this.setState ({showAnswer: false});
               }}
             >
-              <Text>Question</Text>
+              <Text>Pergunta</Text>
             </TouchableOpacity>
           : <TouchableOpacity
               onPress={() => {
                 this.setState ({showAnswer: true});
               }}
             >
-              <Text>Answer</Text>
+              <Text>Resposta</Text>
             </TouchableOpacity>}
 
         <TouchableOpacity
@@ -93,7 +97,7 @@ class Quiz extends React.Component {
           }}
         >
           <Text style={styles.buttonText}>
-            Correct
+            Certo
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -112,7 +116,7 @@ class Quiz extends React.Component {
           }}
         >
           <Text style={styles.buttonText}>
-            Incorrect
+            Errado
           </Text>
         </TouchableOpacity>
         {details[0].questions.length > currentQuestion &&
@@ -121,7 +125,7 @@ class Quiz extends React.Component {
               this.setState ({currentQuestion: this.state.currentQuestion + 1});
             }}
           >
-            <Text>Next</Text>
+            <Text>Próximo</Text>
           </TouchableOpacity>}
 
        
