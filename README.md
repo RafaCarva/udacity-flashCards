@@ -1,22 +1,20 @@
 
--
-----------------------------------------------------
 #Projeto Flashcards Mobile
 Esse app permite que o usuário cadastre listas de cards para estudo. É possível cadastrar 'baralhos' e popula-los com diversos cards de perguntas e respostas. O usuário pode rodar uma lista respondendo as perguntas e no final ver sua pontuação.
 
 Esse projeto foi desenvolvido para Android, e testado no simulador Genymotion.
 
-###Como rodar o projeto
--Clone o projeto.
--Na pasta raiz execute #yarn install
--Em seguida #yarn start
+##Como rodar o projeto
+* Clone o projeto.
+* Na pasta raiz execute '#yarn install'
+* Em seguida '#yarn start'
 
-###Como rodar o emulador
-*Baixe/instale o Genymotion https://www.genymotion.com
-*Adicione o Digital device: Samsung Galaxy S7 -7.1.0 - API 25 - 1440x2560
-*Baixe o .apk do EXPO : https://apkpure.com/expo/host.exp.exponent
-*Rode o simulador (a instância do samsung criada anteriormente), com o android inicializado basta arrastar o .apk do expo para a tela que o apk será instalado. O ícone do app expo deve aparecer na home do android.
-*Com o projeto rodando (yarn start) basta abrir o expo e inserir manualmente o endereço: exp://192.168.56.1:19000
+##Como rodar o emulador
+* Baixe/instale o Genymotion https://www.genymotion.com
+* Adicione o Digital device: Samsung Galaxy S7 -7.1.0 - API 25 - 1440x2560
+* Baixe o .apk do EXPO : https://apkpure.com/expo/host.exp.exponent
+* Rode o simulador (a instância do samsung criada anteriormente), com o android inicializado basta arrastar o .apk do expo para a tela que o apk será instalado. O ícone do app expo deve aparecer na home do android.
+* Com o projeto rodando (yarn start) basta abrir o expo e inserir manualmente o endereço: exp://192.168.56.1:19000
 
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).

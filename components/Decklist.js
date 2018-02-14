@@ -14,7 +14,7 @@ class Decklist extends React.Component{
     }
     fetchDecks=()=>{
         getDecks().then(data=>{
-            console.log(data)
+
             this.setState({
                 cards:Object.keys(data).map((key)=>(data[key])),
                 refreshing:false,
@@ -37,7 +37,7 @@ class Decklist extends React.Component{
     }
     render(){
         const {cards,loading}=this.state
-        console.log(this.state)
+
         if(loading){
             return(
                 <View>
@@ -62,7 +62,6 @@ class Decklist extends React.Component{
                             onPress={()=>this.props.navigation.navigate('Deck',{card:card.title,count:card.questions.length})}
                             key={card.title}
                         >
-                            {console.log(card)}
                             <Text style={styles.title}>{card.title}</Text>
                             <Text>{card.questions.length} {(card.questions.length>1)?'cards':'card'}</Text>
                         </TouchableOpacity>

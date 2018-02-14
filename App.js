@@ -113,7 +113,7 @@ export default class App extends React.Component {
 
 
 componentDidMount(){
-    console.log('App.js > componentDidMount')
+    //console.log('App.js > componentDidMount')
     setLocalNotification()
 }
 

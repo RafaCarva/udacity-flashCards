@@ -40,7 +40,7 @@ const flashkey='@flashCard:key'
 export function getDecks() {
     // pega a lista de decks
     return AsyncStorage.getItem(flashkey).then((data) => {
-       // console.log('retorno de getItem!',data)
+       
 
        //se for != de null já existe um obj no storage, então retorna esse obj
         if(JSON.parse(data)!==null) {
@@ -50,7 +50,7 @@ export function getDecks() {
             //se for == a null crie/insira essa lista de deck 'local' no storage, em seguida retorne ele.
             AsyncStorage.setItem(flashkey,JSON.stringify(decks))
             return AsyncStorage.getItem(flashkey).then((data)=>{
-                //console.log('lista default: ',data)
+                
                 return JSON.parse(data)
             })
         }
@@ -58,12 +58,11 @@ export function getDecks() {
 }
 
 export function getDeck(title){
-    console.log(title)
+
     // 1º busca todos os deck, depois retorna o resultado de um filter (title) 
     return getDecks().then((data)=>{
         let newArray=Object.keys(data).map((key)=>(data[key]))
-        //console.log(newArray)
-        //console.log(newArray.filter((result)=>result.title===title))
+
         return newArray.filter((result)=>result.title===title)
     })
 }
@@ -89,10 +88,10 @@ export function saveDeckTitle(title){
 */
 export function addCardToDeck(title, question,answer){
 
-   // console.log(title,question,answer)
+
     getDeck(title).then(data=>{
         const allOtherQuestions=data
-        //console.log('All other questions',allOtherQuestions[0].questions)
+
         if(allOtherQuestions[0].questions.length>0){
             AsyncStorage.mergeItem(
                 flashkey,
@@ -128,7 +127,7 @@ export function clearLocalNotification() {
 
 export function createNotification() {
     return{
-        title:"Que tal fazedr um quiz hoje?",
+        title:"Que tal fazer um quiz hoje?",
         body:"Você não fez nenhum quiz hoje!",
         android:{
             sound:true,
@@ -143,11 +142,9 @@ export function createNotification() {
  * setLocalNotification() será chamado ao iniciar o app (no componentDidMount de app.js)
  */
 export function setLocalNotification() {
-    console.log('helpers.js > setLocalNotification()')
 
     AsyncStorage.getItem(NOTIFICATION_KEY)
         .then((data)=>{
-            //console.log('-->retorno do getItem :', data)
             return JSON.parse(data)
         })
         .then(data=>{

@@ -31,7 +31,7 @@ class Finish extends React.Component{
         }
     }
     render(){
-        console.log(this.props.navigation.state.params)
+   
         return(
             <View style={styles.container}>
                 <Text style={{fontSize:24,textAlign:'center'}}>\o/ {this.showCompliment(this.state.percentage)}</Text>

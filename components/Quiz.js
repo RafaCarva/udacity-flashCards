@@ -49,7 +49,6 @@ class Quiz extends React.Component {
   };
 
   render () {
-    //console.log (this.state);
     const {currentQuestion, details} = this.state;
     return (
       <View style={styles.container}>
