@@ -1,44 +1,44 @@
 import React from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import {
   getDeck,
   clearLocalNotification,
   setLocalNotification,
 } from '../utils/helpers';
+import FlipCard from 'react-native-flip-card';
 
 class Quiz extends React.Component {
 
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.card} Quiz`,
   });
 
-  constructor (props) {
-    super (props);
+  constructor(props) {
+    super(props);
     this.state = {
-      details: [{questions: []}],
+      details: [{ questions: [] }],
       currentQuestion: 1,
-      showAnswer: false,
       correct: 0,
       showFinish: false,
     };
   }
-  componentDidMount () {
+  componentDidMount() {
     //retorna apenas o card recebido como 'card'.
     //então seta as questões no state 'details'.
-    getDeck (this.props.navigation.state.params.card).then (data => {
-      this.setState ({
+    getDeck(this.props.navigation.state.params.card).then(data => {
+      this.setState({
         details: data,
       });
     });
   }
 
   navigateToFinish = () => {
-    this.setState (
+    this.setState(
       {
         showFinish: false,
       },
       () => {
-        this.props.navigation.navigate ('Finish', {
+        this.props.navigation.navigate('Finish', {
           score: this.state.correct,
           maximum: this.state.details[0].questions.length,
           card: this.props.navigation.state.params.card,
@@ -48,46 +48,57 @@ class Quiz extends React.Component {
     );
   };
 
-  render () {
-    const {currentQuestion, details} = this.state;
+  render() {
+    const { currentQuestion, details } = this.state;
     return (
       <View style={styles.container}>
         <Text>
-          {currentQuestion + '/' + details[0].questions.length}
+          {'Pergunta nº '+ currentQuestion + ' de ' + details[0].questions.length}
         </Text>
 
-        <Text style={styles.question}>
-          {!this.state.showAnswer
-            ? details[0].questions.length > 0 &&
-                details[0].questions[currentQuestion - 1].question
-            : details[0].questions[currentQuestion - 1].answer}
-        </Text>
-        {this.state.showAnswer
-          ? <TouchableOpacity
-              onPress={() => {
-                this.setState ({showAnswer: false});
-              }}
-            >
-              <Text>Pergunta</Text>
-            </TouchableOpacity>
-          : <TouchableOpacity
-              onPress={() => {
-                this.setState ({showAnswer: true});
-              }}
-            >
-              <Text>Resposta</Text>
-            </TouchableOpacity>}
+        <FlipCard
+          style={styles.card}
+          friction={6}
+          perspective={1000}
+          flipHorizontal={true}
+          flipVertical={false}
+          flip={false}
+          clickable={true}
+          onFlipEnd={(isFlipEnd) => { console.log('isFlipEnd', isFlipEnd) }}
+        >
+
+          {/* Face Side */}
+          <View style={styles.face}>
+            <Text>Pergunta:</Text>
+            <Text style={styles.question}>
+              {details[0].questions.length > 0 &&
+                details[0].questions[currentQuestion - 1].question}
+            </Text>
+          </View>
+
+          {/* Back Side */}
+          <View style={styles.back}>
+            <Text>Resposta:</Text>
+            <Text style={styles.question}>
+            {
+              details[0].questions.length > 0 &&
+              details[0].questions[currentQuestion - 1].answer}
+            </Text>
+          </View>
+
+        </FlipCard>
+
 
         <TouchableOpacity
-          style={[styles.button, {backgroundColor: 'green'}]}
+          style={[styles.button, { backgroundColor: 'green' }]}
           onPress={() => {
             if (details[0].questions.length > currentQuestion) {
-              this.setState ({
+              this.setState({
                 correct: this.state.correct + 1,
                 currentQuestion: this.state.currentQuestion + 1,
               });
             } else {
-              this.setState ({
+              this.setState({
                 correct: this.state.correct + 1,
                 showFinish: true,
               })
@@ -100,14 +111,14 @@ class Quiz extends React.Component {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, {backgroundColor: 'red'}]}
+          style={[styles.button, { backgroundColor: 'red' }]}
           onPress={() => {
             if (details[0].questions.length > currentQuestion) {
-              this.setState ({
+              this.setState({
                 currentQuestion: this.state.currentQuestion + 1,
               });
             } else {
-              this.setState ({
+              this.setState({
                 showFinish: true,
               })
               this.navigateToFinish()
@@ -121,27 +132,30 @@ class Quiz extends React.Component {
         {details[0].questions.length > currentQuestion &&
           <TouchableOpacity
             onPress={() => {
-              this.setState ({currentQuestion: this.state.currentQuestion + 1});
+              this.setState({ currentQuestion: this.state.currentQuestion + 1 });
             }}
           >
             <Text>Próximo</Text>
           </TouchableOpacity>}
 
-       
+
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    //flexDirection: ,
+    //justifyContent: 'center',
     alignItems: 'center',
+    //padding:20
   },
   question: {
-    fontSize: 24,
+    fontSize: 20,
     padding: 20,
+    margin: 5,
     textAlign: 'center',
   },
   button: {
@@ -157,6 +171,18 @@ const styles = StyleSheet.create ({
   buttonText: {
     color: 'white',
   },
+  face: {
+    //maxHeight:60
+    backgroundColor: '#6DA1E8',
+  },
+  back: {
+    //maxHeight:60
+    backgroundColor: '#E8E791',
+  },
+  card: {
+    maxHeight: 150
+
+  }
 });
 
 export default Quiz;
