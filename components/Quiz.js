@@ -59,7 +59,7 @@ class Quiz extends React.Component {
         <FlipCard
           style={styles.card}
           friction={12}
-          perspective={5}
+          perspective={1000}
           flipHorizontal={false}
           flipVertical={true}
           flip={false}
