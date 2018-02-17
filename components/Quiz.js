@@ -58,16 +58,16 @@ class Quiz extends React.Component {
 
         <FlipCard
           style={styles.card}
-          friction={6}
-          perspective={1000}
-          flipHorizontal={true}
-          flipVertical={false}
+          friction={12}
+          perspective={5}
+          flipHorizontal={false}
+          flipVertical={true}
           flip={false}
           clickable={true}
           onFlipEnd={(isFlipEnd) => { console.log('isFlipEnd', isFlipEnd) }}
         >
 
-          {/* Face Side */}
+          {/* Frente/Pergunta */}
           <View style={styles.face}>
             <Text>Pergunta:</Text>
             <Text style={styles.question}>
@@ -76,7 +76,7 @@ class Quiz extends React.Component {
             </Text>
           </View>
 
-          {/* Back Side */}
+          {/* Back/Resposta */}
           <View style={styles.back}>
             <Text>Resposta:</Text>
             <Text style={styles.question}>
@@ -88,15 +88,17 @@ class Quiz extends React.Component {
 
         </FlipCard>
 
-
+        {/*Botão 'certo'*/}
         <TouchableOpacity
           style={[styles.button, { backgroundColor: 'green' }]}
           onPress={() => {
             if (details[0].questions.length > currentQuestion) {
               this.setState({
-                correct: this.state.correct + 1,
                 currentQuestion: this.state.currentQuestion + 1,
+                correct: this.state.correct + 1,
+                
               });
+             
             } else {
               this.setState({
                 correct: this.state.correct + 1,
@@ -104,12 +106,16 @@ class Quiz extends React.Component {
               })
               this.navigateToFinish()
             }
+
+          
           }}
         >
           <Text style={styles.buttonText}>
             Certo
           </Text>
         </TouchableOpacity>
+
+        {/*Botão 'certo'*/}
         <TouchableOpacity
           style={[styles.button, { backgroundColor: 'red' }]}
           onPress={() => {
@@ -117,17 +123,22 @@ class Quiz extends React.Component {
               this.setState({
                 currentQuestion: this.state.currentQuestion + 1,
               });
+             
             } else {
               this.setState({
                 showFinish: true,
               })
               this.navigateToFinish()
             }
+
+          
+
           }}
         >
           <Text style={styles.buttonText}>
             Errado
           </Text>
+
         </TouchableOpacity>
         {details[0].questions.length > currentQuestion &&
           <TouchableOpacity
